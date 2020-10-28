@@ -1,37 +1,74 @@
-const url = 'https://covid19-brazil-api.now.sh/api/report/v1';
+$(document).ready(function(){
+        
+    $("#estadoContente").hide();
 
-window.onload = function(){
-    getEstados();
-   
-}
+    const urlGithub = 'https://covid19-brazil-api.now.sh/api/report/v1';
 
 
-function getEstados(){
+getEstados();
+
+
+
+function getEstados(est){
     let request = new XMLHttpRequest();
-    request.open('GET' , url);
+    request.open('GET' , urlGithub);
     request.responseType= 'json';
     request.send();
 
     request.onload = function(){
         let responseData = request.response;
-        formatEstados(responseData.data);
+        if(est){
+            formatEstado(responseData.data)
+        }
+        else{
+            formatEstados(responseData.data)
+
+        }
+
     }
 
 
 
 
+
+}
+
+
+
+
+function formatEstado(est){
+    if(est.state==null){
+        $("#estadoContente").append("estado não encontrado")
+    }
+    else {
+        $("#estadoContente").append('state: ${est.state} <br>' )
+    }
+
+    $("#estadoContente").append("<a href='#' target='blank> voltar</a>")
 
 }
 
 function formatEstados(estados){
+    console.log(estados)
     for(let i = 0; i<estados.length; i++){
         
-        showEstados(estados[i]);
+        let objEstados = {
+            cases:  estados[i].cases,
+            deaths: estados[i].deaths,
+            state: estados[i].state
+
+        }
+        showEstados(objEstados);
     }
 
 }
 
+
+
+
+
 function showEstados(estados){
+    console.log(estados)
     $("#estado_tabela").append("<tr>");
     let object_keys = Object.keys(estados);
 
@@ -52,3 +89,18 @@ function showEstados(estados){
 
 
 }
+
+    $("#botaopesquisa").click(function(){
+            $("#homeContent").hide();
+            $("#estadoContente").show();
+
+            let estadosName= $("input").val();
+            getEstados(estadosName)
+        }
+
+
+    )
+
+
+
+})

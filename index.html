@@ -19,11 +19,15 @@
 
         <div class="col-3">
             <label>Procurar por estado:</label>
-            <input type="search" type="text"><br>
-            <button class="mt-2 btn btn-light">Procurar</button>
-        </div>
+            <form class="from-inline mt-2 mt-md-0">
+                <input type="search" type="text" placeholder="Pesquisa" ><br>
+                <button id="botaopesquisa" class="mt-2 btn btn-light" type="button">Procurar</button>
+        
+            </form>
+                </div>
         <div class="col m-auto pt-5">
             <h4 id="title" class="text-center">Casos do COVID-19 no Brasil</h4>
+            <div id="homeContent">
             <table class="table table-striped w-auto mt-5 m-auto">
                 <thead>
                     <tr>
@@ -36,6 +40,10 @@
                     </tbody>
                 </thead>
             </table>
+        </div>
+            <div id="estadoContente">
+                
+            </div>
         </div>
     </main> 
 
@@ -59,7 +67,6 @@
   
     <!-- Copyright -->
     <div class="footer-copyright text-center py-3">©2020 WALNEY NEGREIROS GOMES:
-      <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
     </div>
     <!-- Copyright -->
   
